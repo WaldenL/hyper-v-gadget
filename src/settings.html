@@ -1,0 +1,104 @@
+﻿<html>
+<head>
+    <title>Hyper-V Monitor Settings</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<style type="text/css">body{width:330;height:370;} input{font-size:11px;}</style>
+    <script type="text/javascript" language="javascript" src="jsencryption.js"></script>
+    <script type="text/javascript" language="javascript" src="shared.js"></script>
+    <script type="text/javascript" language="javascript" src="languages.js"></script>
+	<script type="text/javascript" language="javascript" src="settings.js"></script>
+</head>
+<body onload="onLoad()"  style="font-size: 10px;">
+	<input name="serverListString" id="serverListString" type="hidden" value="" />
+    <div style="position:absolute; top: 0px;">
+        <div onclick="showTab('generalTab')" id="generalTab" style="float:left; padding: 5px; border-left: 1px solid gray; border-top: 1px solid gray; cursor:hand;"><label id="generalTabLabel">General</label></div>
+        <div onclick="showTab('serverTab')" id="serverTab" style="float:left; padding: 5px; border-left: 1px solid gray; border-top: 1px solid gray; border-right: 1px solid gray; cursor:hand;"><label id="serverTabLabel">Servers</label></div>
+    </div>
+    <div style="border-top: 1px solid gray; position:absolute; top: 22px; left: 0px; right: 0px; width:300px; height: 320px;padding: 5px;">
+        <div id="serverTabPanel" style="display:none;">
+            <table cellpadding="0" cellspacing="0"><tr><td valign="top">
+        	<select style="width:120; height:320px; font-size: 11px;" name="serverList" size="22" id="serverList" onchange="showServerInfo(this)">
+          	</select>&nbsp;&nbsp;        	
+            </td><td valign="top" style="font-size: 10px;">
+        	<div id="addServerDiv" style="visibility:hidden">
+        	<label id="serverLabel2">Server</label> <i>(<label id="requiredLabel">required</label>)</i>
+          	<br />
+          	<input style="width:170; height:20;" type="text" name="addServerName" id="addServerName" onkeypress="saveServerEnter();" /><br />
+          	<label id="usernameLabel">Username</label>
+          	<br />
+          	<input style="width:170; height:20;" type="text" name="addServerUser" id="addServerUser" onkeypress="saveServerEnter();" /><br />
+          	<label id="passwordLabel">Password</label>
+          	<br />
+          	<input style="width:170; height:20; padding-bottom: 0px" type="password" name="addServerPass" id="addServerPass" onkeypress="saveServerEnter();" /><br />
+		<hr>
+          	<label id="connectionLabel">Remote desktop</label> <select style="margin-top: 2px;font-size: 10px;" name="addServerConn" id="addServerConn" onchange="saveServerEnter();"><option value="Terminal" id="terminalOption">Terminal</option><option value="Console" id="consoleOption">Console</option><option value="Both" id="bothOption">Both</option><option value="None" id="noneOption">None</option></select>
+		<hr>
+  		<label id="showVMLabel">Show</label> <input id="addServerMaxVMs" name="addServerMaxVMs" type="text" maxlength="2" style="width:20; height:20;" onkeypress="saveServerEnter_Numeric();" /> <label id="VMLabel">Virtual Machines</label>
+		<br />
+          	<label id="VMCPU">CPU</label> <input id="addServerVMCPU" type="checkbox" name="addServerVMCPU" onchange="saveServerEnter();" /> <label id="VMDetails">Details</label> <input id="addServerVMDetails" type="checkbox" name="addServerVMDetails" onchange="saveServerEnter();" />
+		<hr>
+        	<label id="macAddressLabel">MAC address</label> <i>(<label id="wakeOnLanLabel">Wake on Lan</label>)</i>
+          	<br />
+          	<input style="width:170; height:20;" type="text" maxlength="12" name="addServerMAC" id="addServerMAC" onkeypress="saveServerEnter_MAC();" /><br />
+          	<label id="ipAddressLabel">IP Address</label> <i>(<label id="wakeOnLanLabel2">Wake on Lan</label>)</i>
+          	<br />
+          	<input style="width:170; height:20;" type="text" maxlength="15" name="addServerIP" id="addServerIP" onkeypress="saveServerEnter_IP();" /><br />
+		<label id="udpPortLabel">UDP Port</label> <i>(<label id="wakeOnLanLabel3">Wake on Lan</label>)</i>
+		<br />
+		<input style="width:50; height:20;" type="text" maxlength="5" name="addServerUDP" id="addServerUDP" onkeypress="saveServerEnter_Numeric();" />
+            	<input type="hidden" name="addServerVMs" id="addServerVMs" /><input type="hidden" name="addServerScroll" id="addServerScroll" />
+        	</div>
+            </td></tr>
+	    <tr><td valign="top">
+		<input style="float:left;" type="submit" name="New" id="addServer" value="New" onclick="addServerAdd();" />
+		<input style="float:right; margin-right: 10px; margin-top: 1px;" type="image" name="Down" id="moveDownServer" src="down.png" onclick="MoveDown();" />
+		<input style="float:right;  margin-top: 1px; margin-right: 2px;" type="image" name="Up" id="moveUpServer" src="up.png" onclick="MoveUp();" />
+		</td>
+		<td valign="top">
+        	<div id="addServerDiv2" style="visibility:hidden">
+        	<input type="submit" name="Save" id="saveServer" value="Save" onclick="addServerSave();" /><input type="submit" name="Remove" id="removeServer" value="Delete" onclick="addServerRemove();" />
+            	<input name="addServerOldServer" id="addServerOldServer" type="hidden" value="" />
+        	</div>
+		</td>
+	    </tr></table>
+        </div>
+        <div id="generalTabPanel">
+            <table cellpadding="3" cellspacing="0">
+            	<tr>
+            		<td style="white-space:nowrap; font-size: 10px;"><b><label id="refreshTimeLabel">Refresh Time</label></b> </td>
+            		<td style="white-space:nowrap; font-size: 10px;"><input id="RefreshTime" type="text" maxlength="4" style="margin-top: 2px; width: 30px;" onkeypress="onlyNumeric();" /> (<label id="secondsLabel">seconds</label>)</td>
+            	</tr>
+                <tr>
+            		<td valign="top" style="white-space:nowrap; font-size: 10px;"><b><label id="serverControlLabel">Server Control</label></b></td>
+            		<td><input id="VMMenu" type="checkbox" /></td>
+            	</tr>
+            	<tr>
+            		<td style="white-space:nowrap; font-size: 10px;"><b><label id="clickBehaviourLabel">Click Behaviour</label></b></td>
+            		<td><select style="margin-top: 2px;font-size: 10px;" id="VMClickType"><option value="ondblclick" id="ondblclickOption">Double Click</option><option value="onclick" id="onclickOption">Single Click</option></select></td>
+            	</tr>
+                <tr>
+            		<td style="white-space:nowrap; font-size: 10px;"><b><label id="languageLabel">Language</label></b></td>
+            		<td><select style="margin-top: 2px;font-size: 10px;" id="languageSelect" onchange="tempLoadLanguage()">
+                        <option value="cn-cn">Chinese</option>                        
+                        <option value="de">Deutsch</option>
+                        <option value="en-us">English</option>
+                        <option value="fr-fr">French</option>
+                        <option value="it-it">Italian</option>
+                        <option value="du-nl">Nederlands</option>
+                        <option value="nb-no">Norsk</option>
+                        <option value="pl-pl">Polish</option>
+                        <option value="pt-br">Portuguese</option>
+                        <option value="se-se">Svenska</option>
+                    </select></td>
+            	</tr>
+            </table>
+            <div style="position:absolute; bottom: 0;">
+                <label id="madeByLabel">Made by</label>: Tore Lervik <label id="andLabel">and</label> Wibout Bootsma<br />
+                <label id="translationdByLabel">Translation by</label>: <label id="translationdByNameLabel">Tore Lervik</label><br />
+                <label id="versionLabel">Version</label>: <span id="GadgetVersion"></span><br />
+                <label id="checkUpdatesLabel">Check for updates</label>: <a href="http://mindre.net/post/Hyper-V-Monitor-Gadget-for-Windows-Sidebar.aspx">http://mindre.net</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

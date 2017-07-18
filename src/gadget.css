@@ -1,0 +1,209 @@
+body 
+{ 
+	font-size: 9px;
+	font-family: Segoe UI;
+	color: #87CEFA;
+	width:130px;
+	height:100px;
+	margin:0px;
+	padding:0px;
+}
+
+#Main
+{
+	background-color: #3e3e3e;
+	border: 1px solid #4d4d4d;
+	width: 100%;
+	height: 100%;
+}
+
+.hyperVServer
+{
+    font-weight:bold; 
+    height:17px; 
+    white-space:nowrap; 
+    color:White; 
+    padding: 2px 0px 2px 0px; 
+    position:relative;
+    border-bottom: 1px solid #333;
+}
+
+.hyperVServer, .hyperVServer div 
+{
+    background-color: #4d4d4d;
+}
+
+.hyperVServer .name 
+{
+    position:absolute; 
+    width: 98%; 
+    white-space:nowrap; 
+    overflow:hidden; 
+    margin-left:2px; 
+}
+
+.hyperVServer .memory 
+{
+    position:absolute; 
+    right:0px; 
+    top:0px; 
+    color: #87CEFA;
+    text-align:center; 
+    white-space:nowrap; 
+    padding-top:2px; 
+    padding-left: 2px; 
+    padding-right: 2px;
+    width:51px; 
+    height:17px;
+    border-bottom: 1px solid #333;
+}
+
+.hyperVServer .offline 
+{
+    position:absolute; 
+    right:0px; 
+    top:0px; 
+    color: red; 
+    text-align:center; 
+    white-space:nowrap; 
+    padding-top:2px; 
+    padding-left: 2px; 
+    padding-right: 2px; 
+    width:51px; 
+    height:17px;
+    border-bottom: 1px solid #333;
+}
+
+.hyperVServer .buttons 
+{
+    position:absolute; 
+    visibility:hidden;
+    text-align:right;
+    align:right;
+    right:0px; 
+    top:0px; 
+    width: 51px; 
+    white-space:nowrap; 
+    padding-left: 2px; 
+    padding-right: 3px; 
+    padding-top: 2px;
+}
+
+.hyperVServer .rdp
+{
+    position: absolute;
+    top: 2px;
+    right: 53px;
+    visibility:hidden; 
+}
+
+.buttons img
+{
+    cursor: hand;
+    height: 13px;
+    border: 0;
+    margin-left: 1px;
+}
+
+.hyperVVm
+{
+    height:17px; 
+    white-space:nowrap; 
+    color:Black; 
+    padding: 2px 0px 2px 0px; 
+    position:relative;
+    border-bottom: 1px solid #333;
+    background-image: url("vmBackground.png");
+}
+
+.hyperVVm .name 
+{
+    position:absolute; 
+    width: 98%; 
+    white-space:nowrap; 
+    overflow:hidden; 
+    margin-left:2px; 
+    color: #87CEFA; 
+}
+
+.hyperVVm .state 
+{
+    position:absolute; 
+    right:0px; 
+    top:0px; 
+    background-color: #c7951a;
+    width: 51px; 
+    text-align:center; 
+    white-space:nowrap; 
+    padding-top:2px; 
+    padding-left: 2px; 
+    padding-right: 2px; 
+    height:17px;
+    border-left: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+
+.hyperVVm .cpuHistory
+{
+    position:absolute; 
+    right:0px; 
+    top:0px; 
+    background-color: #2d782d;
+    width: 51px; 
+    padding: 0; 
+    height:16px;
+    border-left: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+
+.hyperVVm .cpuHistory .cpuHistoryLine
+{
+    float:right; 
+    width: 1px; 
+    overflow:hidden; 
+    height: 16px;
+    background-color: #2d782d;
+}
+
+.hyperVVm .cpuHistory .cpuHistoryLine .line
+{
+    position:absolute; 
+    bottom: 0;
+    background-color: White; 
+    width:1px;
+    height: 0px;
+    overflow:hidden;
+}
+
+.hyperVVm .buttons 
+{
+    position:absolute; 
+    visibility:hidden; 
+    right:0px; 
+    top:0px; 
+    text-align:center; 
+    align:center; 
+    width: 51px; 
+    white-space:nowrap; 
+    padding-left: 0px; 
+    padding-right: 1px; 
+    padding-top: 1px;
+    padding-bottom: 2px;
+    border-left: 1px solid #3a3a3a;
+    background-color: #3e3e3e;
+}
+
+.hyperVVm .rdp
+{
+    position: absolute;
+    top: 2px;
+    right: 53px;
+    visibility:hidden; 
+}
+
+.hyperVVm .rdp img
+{
+    cursor:hand;
+    height: 13px;
+    border: 0;
+}
