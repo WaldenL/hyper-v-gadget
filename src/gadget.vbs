@@ -1,10 +1,34 @@
+Function getWMIPath(server, username, password)
+    Set objLocator = CreateObject("WbemScripting.SwbemLocator")
+
+    If username = "" Then
+        Set objWMIService = objLocator.ConnectServer(server, "root\virtualization")
+    Else
+        Set objWMIService = objLocator.ConnectServer(server, "root\virtualization", username, password)
+    End IF
+            
+    Set colItem = objWMIService.ExecQuery("select * from __namespace where name='v2'")
+	
+	If colItem.count > 0 Then
+		getWMIPath = "root\virtualization\v2"
+	Else 
+		getWMIPath = "root\virtualization"
+	End IF
+   
+	Set objWMIService = Nothing
+    Set colItem = Nothing
+    Set objLocator = Nothing           
+End Function
+
 Function ChangeState(server, machine, stateId, username, password)
 	Set objLocator = CreateObject("WbemScripting.SwbemLocator")
 
+	WMIPath = getWMIPath(server, username, password)
+	
 	If username = "" Then
-		Set objWMIService = objLocator.ConnectServer(server, "root\virtualization")
+		Set objWMIService = objLocator.ConnectServer(server, WMIPath)
 	Else
-		Set objWMIService = objLocator.ConnectServer(server, "root\virtualization", username, password)
+		Set objWMIService = objLocator.ConnectServer(server, WMIPath)
 	End IF
 	        
 	Set colItem = objWMIService.ExecQuery("select * from Msvm_ComputerSystem where Name='" + machine + "'")
@@ -19,11 +43,13 @@ Function ShutDown(server, machine, username, password)
 	Set objLocator = CreateObject("WbemScripting.SwbemLocator")
 
 	If machine <> "" Then
+	
+		WMIPath = getWMIPath(server, username, password)
 	        
 		If username = "" Then
-			Set objWMIService = objLocator.ConnectServer(server, "root\virtualization")
+			Set objWMIService = objLocator.ConnectServer(server, WMIPath)
 		Else
-			Set objWMIService = objLocator.ConnectServer(server, "root\virtualization", username, password)
+			Set objWMIService = objLocator.ConnectServer(server, WMIPath, username, password)
 		End IF
 			            
 		Set shutdownItem = objWMIService.ExecQuery("select * from Msvm_ShutdownComponent where SystemName='" + machine + "'")
@@ -236,10 +262,12 @@ Function GetVMIP(server, VM, username, password)
 	IPAddress = ""
 	Set objLocator = CreateObject("WbemScripting.SwbemLocator")
     
+	WMIPath = getWMIPath(server, username, password)
+	
 	If Len(username) = 0 Then
-		Set objWMIService = objLocator.ConnectServer(server, "root\virtualization")
+		Set objWMIService = objLocator.ConnectServer(server, WMIPath)
 	Else
-		Set objWMIService = objLocator.ConnectServer(server, "root\virtualization", username, password)
+		Set objWMIService = objLocator.ConnectServer(server, WMIPath, username, password)
 	End If
 	If Err = 0 Then
  		On Error Resume Next
@@ -315,10 +343,12 @@ Function GetVMs(server, username, password, CPU, Details)
 	Err.Clear
 	Set objLocator = CreateObject("WbemScripting.SwbemLocator")
     
+	WMIPath = getWMIPath(server, username, password)
+	
 	If Len(username) = 0 Then
-		Set objWMIService = objLocator.ConnectServer(server, "root\virtualization")
+		Set objWMIService = objLocator.ConnectServer(server, WMIPath)
 	Else
-		Set objWMIService = objLocator.ConnectServer(server, "root\virtualization", username, password)
+		Set objWMIService = objLocator.ConnectServer(server, WMIPath, username, password)
 	End If
 
 	If Err = 0 Then
