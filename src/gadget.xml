@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <gadget>
     <name>Hyper-V Monitor</name>
-    <namespace>HV.Monitor</namespace>
-    <version>5.2.5</version>
-    <author name="Tore Lervik">
+    <version>10.0.0</version>
+	<author name="Walden Leverich">
+        <info url="https://github.com/WaldenL/hyper-v-gadget" />
+    </author>
+    <!-- Original Author and copyright info
+	<author name="Tore Lervik">
         <info url="mindre.net" />
     </author>
     <copyright>2010</copyright>
+	-->
     <description>Hyper-V Monitor Gadget</description>
     <icons>
        <icon height="100" width="92" src="Icon.png" />
     </icons>
     <hosts>
         <host name="sidebar">
-            <base type="HTML" apiVersion="5.2.5" src="Gadget.html" />
+            <base type="HTML" apiVersion="1.0.0" src="Gadget.html" />
             <permissions>full</permissions>
-            <platform minPlatformVersion="0.3" />
+            <platform minPlatformVersion="1.0" />
         </host>
     </hosts>
 </gadget>
